@@ -18,5 +18,11 @@
         "psr-4": {
             "katanyoo\\mailer\\": ""
         }
-    }
+    },
+    "repositories":[
+        {
+            "type": "git",
+            "url": "https://github.com/katanyoo/yii2-mailgun-mailer"
+        }
+    ]
 }
