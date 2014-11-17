@@ -1,0 +1,22 @@
+{
+    "name": "katanyoo/yii2-mailgun-mailer",
+    "description": "Mailgun Mailer for Yii 2 framework.",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","mailer","mailgun"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Katanyoo Ubalee",
+            "email": "ubalee.k@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*",
+        "mailgun/mailgun-php": "1.7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "katanyoo\\mailer\\": ""
+        }
+    }
+}
