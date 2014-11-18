@@ -15,6 +15,33 @@ use yii\mail\BaseMessage;
  */
 class Message extends BaseMessage
 {
+
+	protected $bcc;
+	protected $cc;
+	protected $charset;
+	protected $from;
+	protected $htmlBody;
+	protected $replyTo;
+	protected $subject;
+	protected $textBody;
+	protected $to;
+	/**
+	 * @inheritdoc
+	 */
+	public function getCharset()
+	{
+	    return $this->charset;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function setCharset($charset)
+	{
+	    $this->charset = $charset;
+
+	    return $this;
+	}
 	/**
 	 * @inheritdoc
 	 */
@@ -36,6 +63,24 @@ class Message extends BaseMessage
 	/**
 	 * @inheritdoc
 	 */
+	public function getReplyTo()
+	{
+	    return $this->replyTo;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function setReplyTo($replyTo)
+	{
+	    $this->replyTo = $replyTo;
+
+	    return $this;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
 	public function getTo()
 	{
 	    return $this->to;
@@ -47,6 +92,42 @@ class Message extends BaseMessage
 	public function setTo($to)
 	{
 	    $this->to = $to;
+
+	    return $this;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function getCc()
+	{
+	    return $this->cc;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function setCc($cc)
+	{
+	    $this->cc = $cc;
+
+	    return $this;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function getBcc()
+	{
+	    return $this->bcc;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function setBcc($bcc)
+	{
+	    $this->bcc = $bcc;
 
 	    return $this;
 	}
@@ -77,5 +158,55 @@ class Message extends BaseMessage
 	    $this->textBody = $text;
 
 	    return $this;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function setHtmlBody($html)
+	{
+	    $this->htmlBody = $html;
+
+	    return $this;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function attach($fileName, array $options = [])
+	{
+	    return $this;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function attachContent($content, array $options = [])
+	{
+	    return $this;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function embed($fileName, array $options = [])
+	{
+	    return null;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function embedContent($content, array $options = [])
+	{
+	    return null;
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function toString()
+	{
+	    return $this->getSwiftMessage()->toString();
 	}
 }
