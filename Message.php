@@ -207,6 +207,6 @@ class Message extends BaseMessage
 	 */
 	public function toString()
 	{
-	    return $this->getSwiftMessage()->toString();
+	    return "mailgun_tostring()_method";
 	}
 }
