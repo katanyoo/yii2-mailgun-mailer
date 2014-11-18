@@ -83,7 +83,7 @@ class Mailer extends BaseMailer
 		$messageBldr->setClickTracking($this->clicksTrackingMode);
 
 		$response = $this->getMailgunMailer()->post(
-			"{$domain}/messages", 
+			"{$this->domain}/messages", 
 			$messageBldr->getMessage(), 
 			$messageBldr->getFiles()
 			);
