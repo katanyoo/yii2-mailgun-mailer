@@ -37,7 +37,7 @@ class Message extends BaseMessage
 	public function getMessageBuilder()
 	{
 		if (!is_object($this->_messageBuilder)) {
-			$this->_messageBuilder = $this->createSwiftMessage();
+			$this->_messageBuilder = $this->createMessageBuilder();
 		}
 
 		return $this->_messageBuilder;

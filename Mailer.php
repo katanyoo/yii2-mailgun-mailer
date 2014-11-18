@@ -75,13 +75,13 @@ class Mailer extends BaseMailer
 		$message->setClickTracking($this->clicksTrackingMode)
 		->addTags($this->tags);
 
+		Yii::info('Sending email', __METHOD__);
 		$response = $this->getMailgunMailer()->post(
 			"{$this->domain}/messages", 
 			$message->getMessage(), 
 			$message->getFiles()
 			);
 
-		Yii::info('Sending email "'.$messageBldr->getSubject().'" to "'.$messageBldr->getTo(), __METHOD__);
 		Yii::info('Response : '.print_r($response, true), __METHOD__);
 
 		return true;
