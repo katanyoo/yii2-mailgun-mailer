@@ -33,7 +33,7 @@ class Mailer extends BaseMailer
 	 * [$messageClass description]
 	 * @var string message default class name.
 	 */
-	//public $messageClass = 'katanyoo\mailer\Message';
+	public $messageClass = 'katanyoo\mailer\Message';
 
 	public $domain;
 	public $key;
