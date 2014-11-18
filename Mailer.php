@@ -69,23 +69,16 @@ class Mailer extends BaseMailer
 	 */
 	protected function sendMessage($message)
 	{
-		$messageBldr = $this->getMailgunMailer()->MessageBuilder();
+		$mailer = $this->getMailgunMailer();
 
-		#Define the from address.
-		$messageBldr->setFromAddress($message->getFrom());
-		#Define a to recipient.
-		$messageBldr->addToRecipient($message->getTo());
-		#Define the subject.
-		$messageBldr->setSubject($message->getSubject());
-		#Define the body of the message.
-		$messageBldr->setTextBody($message->getTextBody());
 
-		$messageBldr->setClickTracking($this->clicksTrackingMode);
+		$message->setClickTracking($this->clicksTrackingMode)
+		->addTags($this->tags);
 
 		$response = $this->getMailgunMailer()->post(
 			"{$this->domain}/messages", 
-			$messageBldr->getMessage(), 
-			$messageBldr->getFiles()
+			$message->getMessage(), 
+			$message->getFiles()
 			);
 
 		Yii::info('Sending email "'.$messageBldr->getSubject().'" to "'.$messageBldr->getTo(), __METHOD__);

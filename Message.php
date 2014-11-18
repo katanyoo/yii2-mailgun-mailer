@@ -16,7 +16,7 @@ use yii\mail\BaseMessage;
 class Message extends BaseMessage
 {
 
-	protected $bcc;
+/*	protected $bcc;
 	protected $cc;
 	protected $charset;
 	protected $from;
@@ -24,13 +24,31 @@ class Message extends BaseMessage
 	protected $replyTo;
 	protected $subject;
 	protected $textBody;
-	protected $to;
+	protected $to;*/
+
+	/**
+	 * @var \Mailgun\Messages\MessageBuilder Mailgun message instance.
+	 */
+	private $_messageBuilder;
+
+	/**
+	 * @return \Swift_Message Swift message instance.
+	 */
+	public function getMessageBuilder()
+	{
+		if (!is_object($this->_messageBuilder)) {
+			$this->_messageBuilder = $this->createSwiftMessage();
+		}
+
+		return $this->_messageBuilder;
+	}
+
 	/**
 	 * @inheritdoc
 	 */
 	public function getCharset()
 	{
-	    return $this->charset;
+		return 'utf-8';
 	}
 
 	/**
@@ -38,16 +56,15 @@ class Message extends BaseMessage
 	 */
 	public function setCharset($charset)
 	{
-	    $this->charset = $charset;
-
-	    return $this;
+		return $this;
 	}
+
 	/**
 	 * @inheritdoc
 	 */
 	public function getFrom()
 	{
-	    return $this->from;
+		return $this->getMessageBuilder()->getFrom();
 	}
 
 	/**
@@ -55,9 +72,9 @@ class Message extends BaseMessage
 	 */
 	public function setFrom($from)
 	{
-	    $this->from = $from;
+		$this->getMessageBuilder()->setFromAddress($from);
 
-	    return $this;
+		return $this;
 	}
 
 	/**
@@ -65,7 +82,7 @@ class Message extends BaseMessage
 	 */
 	public function getReplyTo()
 	{
-	    return $this->replyTo;
+		return $this->replyTo;
 	}
 
 	/**
@@ -73,9 +90,9 @@ class Message extends BaseMessage
 	 */
 	public function setReplyTo($replyTo)
 	{
-	    $this->replyTo = $replyTo;
+		$this->getMessageBuilder()->setReplyToAddress($replyTo);
 
-	    return $this;
+		return $this;
 	}
 
 	/**
@@ -83,7 +100,7 @@ class Message extends BaseMessage
 	 */
 	public function getTo()
 	{
-	    return $this->to;
+		return $this->to;
 	}
 
 	/**
@@ -91,9 +108,9 @@ class Message extends BaseMessage
 	 */
 	public function setTo($to)
 	{
-	    $this->to = $to;
+		$this->getMessageBuilder()->addToRecipient($to);
 
-	    return $this;
+		return $this;
 	}
 
 	/**
@@ -101,7 +118,7 @@ class Message extends BaseMessage
 	 */
 	public function getCc()
 	{
-	    return $this->cc;
+		return $this->cc;
 	}
 
 	/**
@@ -109,9 +126,9 @@ class Message extends BaseMessage
 	 */
 	public function setCc($cc)
 	{
-	    $this->cc = $cc;
+		$this->getMessageBuilder()->addCcRecipient($cc);
 
-	    return $this;
+		return $this;
 	}
 
 	/**
@@ -119,7 +136,7 @@ class Message extends BaseMessage
 	 */
 	public function getBcc()
 	{
-	    return $this->bcc;
+		return $this->bcc;
 	}
 
 	/**
@@ -127,9 +144,9 @@ class Message extends BaseMessage
 	 */
 	public function setBcc($bcc)
 	{
-	    $this->bcc = $bcc;
+		$this->getMessageBuilder()->addBccRecipient($bcc);
 
-	    return $this;
+		return $this;
 	}
 
 	/**
@@ -137,7 +154,7 @@ class Message extends BaseMessage
 	 */
 	public function getSubject()
 	{
-	    return $this->subject;
+		return $this->subject;
 	}
 
 	/**
@@ -145,9 +162,9 @@ class Message extends BaseMessage
 	 */
 	public function setSubject($subject)
 	{
-	    $this->subject = $subject;
+		$this->getMessageBuilder()->setSubject($subject);
 
-	    return $this;
+		return $this;
 	}
 
 	/**
@@ -155,9 +172,9 @@ class Message extends BaseMessage
 	 */
 	public function setTextBody($text)
 	{
-	    $this->textBody = $text;
+		$this->getMessageBuilder()->setTextBody($text);
 
-	    return $this;
+		return $this;
 	}
 
 	/**
@@ -165,9 +182,9 @@ class Message extends BaseMessage
 	 */
 	public function setHtmlBody($html)
 	{
-	    $this->htmlBody = $html;
+		$this->getMessageBuilder()->setHtmlBody($html);
 
-	    return $this;
+		return $this;
 	}
 
 	/**
@@ -175,7 +192,8 @@ class Message extends BaseMessage
 	 */
 	public function attach($fileName, array $options = [])
 	{
-	    return $this;
+		$this->getMessageBuilder()->addAttachment($fileName);
+		return $this;
 	}
 
 	/**
@@ -183,7 +201,8 @@ class Message extends BaseMessage
 	 */
 	public function attachContent($content, array $options = [])
 	{
-	    return $this;
+		$this->getMessageBuilder()->addAttachment($content);
+		return $this;
 	}
 
 	/**
@@ -191,7 +210,8 @@ class Message extends BaseMessage
 	 */
 	public function embed($fileName, array $options = [])
 	{
-	    return null;
+		//$this->getMessageBuilder()->addAttachment($fileName);
+		return null;
 	}
 
 	/**
@@ -199,7 +219,8 @@ class Message extends BaseMessage
 	 */
 	public function embedContent($content, array $options = [])
 	{
-	    return null;
+		//$this->getMessageBuilder()->addAttachment($fileName);
+		return null;
 	}
 
 	/**
@@ -207,6 +228,49 @@ class Message extends BaseMessage
 	 */
 	public function toString()
 	{
-	    return "mailgun_tostring()_method";
+		return "mailgun_tostring()_method";
+	}
+
+	public function addTags($tags)
+	{
+		foreach ($tags as $tag) {
+			$this->getMessageBuilder()->addTag($tag);
+		}
+		return $this;
+	}
+
+	/**
+	 * Set click tracking
+	 * @param Boolean|String $enabled true, false, "html"
+	 */
+	public function setClickTracking($enabled)
+	{
+		$this->getMessageBuilder()->setClickTracking($enabled);
+		return $this;
+	}
+
+	/**
+	 * @return Array message object
+	 */
+	public function getMessage()
+	{
+		return $this->getMessageBuilder()->getMessage();
+	}
+
+	/**
+	 * @return Array files list
+	 */
+	public function getFiles()
+	{
+		return $this->getMessageBuilder()->getFiles();
+	}
+
+	/**
+	 * Creates the Mailgun email message instance.
+	 * @return \MessageBldr email message instance.
+	 */
+	protected function createMessageBuilder()
+	{
+		return new \Mailgun\Messages\MessageBuilder();
 	}
 }
