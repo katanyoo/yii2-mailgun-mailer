@@ -1,6 +1,6 @@
-Yii2 Mailer
-===========
-Mailgun Mailer for Yii 2 framework.
+Yii2 Mailgun Mailer
+===================
+Mailgun mailer for Yii 2 framework.
 
 Installation
 ------------
@@ -28,4 +28,4 @@ Usage
 Once the extension is installed, simply use it in your code by  :
 
 ```php
-<?= \katanyoo\mailer\AutoloadExample::widget(); ?>```
+<?= \katanyoo\mailer\Mailer::widget(); ?>```

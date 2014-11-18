@@ -15,5 +15,5 @@ use yii\mail\BaseMessage;
  */
 class Message extends BaseMessage
 {
-
+	private $_mailgunMessage;
 }
