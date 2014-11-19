@@ -16,7 +16,8 @@
     },
     "autoload": {
         "psr-4": {
-            "katanyoo\\mailer\\": ""
+            "katanyoo\\mailer\\": "",
+            "Mailgun\\": ""
         }
     },
     "repositories":[

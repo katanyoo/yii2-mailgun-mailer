@@ -2,8 +2,6 @@
 
 namespace katanyoo\mailer;
 
-require 'vendor/autoload.php';
-
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\mail\BaseMailer;

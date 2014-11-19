@@ -3,6 +3,7 @@
 namespace katanyoo\mailer;
 
 use yii\mail\BaseMessage;
+require_once __DIR__.'/../../mailgun/mailgun-php/src/Mailgun/Constants/Constants.php';
 
 /**
  * Message implements a message class based on Mailgun.
@@ -82,7 +83,7 @@ class Message extends BaseMessage
 	 */
 	public function getReplyTo()
 	{
-		return $this->replyTo;
+		return null;
 	}
 
 	/**
@@ -100,7 +101,7 @@ class Message extends BaseMessage
 	 */
 	public function getTo()
 	{
-		return $this->to;
+		return null;
 	}
 
 	/**
@@ -118,7 +119,7 @@ class Message extends BaseMessage
 	 */
 	public function getCc()
 	{
-		return $this->cc;
+		return null;
 	}
 
 	/**
@@ -136,7 +137,7 @@ class Message extends BaseMessage
 	 */
 	public function getBcc()
 	{
-		return $this->bcc;
+		return null;
 	}
 
 	/**
@@ -154,7 +155,7 @@ class Message extends BaseMessage
 	 */
 	public function getSubject()
 	{
-		return $this->subject;
+		return null;
 	}
 
 	/**
@@ -271,6 +272,6 @@ class Message extends BaseMessage
 	 */
 	protected function createMessageBuilder()
 	{
-		return new \Mailgun\Messages\MessageBuilder();
+		return new MessageBuilder();
 	}
 }
