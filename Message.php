@@ -3,6 +3,8 @@
 namespace katanyoo\mailer;
 
 use yii\mail\BaseMessage;
+use Mailgun\Messages\MessageBuilder;
+
 require_once __DIR__.'/../../mailgun/mailgun-php/src/Mailgun/Constants/Constants.php';
 
 /**
@@ -65,7 +67,7 @@ class Message extends BaseMessage
 	 */
 	public function getFrom()
 	{
-		return $this->getMessageBuilder()->getFrom();
+		return null;
 	}
 
 	/**
