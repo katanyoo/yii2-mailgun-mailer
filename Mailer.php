@@ -1,6 +1,6 @@
 <?php
 
-namespace katanyoo\mailer;
+namespace katanyoo\mailgunmailer;
 
 use Yii;
 use yii\base\InvalidConfigException;
@@ -33,7 +33,7 @@ class Mailer extends BaseMailer
 	 * [$messageClass description]
 	 * @var string message default class name.
 	 */
-	public $messageClass = 'katanyoo\mailer\Message';
+	public $messageClass = 'katanyoo\mailgunmailer\Message';
 
 	public $domain;
 	public $key;
@@ -47,8 +47,6 @@ class Mailer extends BaseMailer
 	public $enableTracking;
 	public $clicksTrackingMode; // true, false, "html"
 	public $enableOpensTracking;
-
-	public $viewPath = '@app/views/mail';
 
 	private $_mailgunMailer;
 

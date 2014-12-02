@@ -28,4 +28,12 @@ Usage
 Once the extension is installed, simply use it in your code by  :
 
 ```php
-<?= \katanyoo\mailer\Mailer::widget(); ?>```
+<?php
+Yii::$app->mailer->compose('<view_name>', <option>)
+->setFrom("<from email>")
+->setTo("<to email>")
+->setSubject("<subject>")
+// ->setHtmlBody("<b> Hello User </b>")
+// ->setTextBody("Hello User")
+->send();
+?>```
