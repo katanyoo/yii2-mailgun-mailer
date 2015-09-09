@@ -1,5 +1,5 @@
 {
-    "name": "katanyoo/yii2-mailgun-mailer",
+    "name": "farmani/yii2-mailgun-mailer",
     "description": "Mailgun Mailer for Yii 2 framework.",
     "type": "yii2-extension",
     "keywords": ["yii2","extension","mailer","mailgun"],
@@ -23,7 +23,7 @@
     "repositories":[
         {
             "type": "git",
-            "url": "https://github.com/katanyoo/yii2-mailgun-mailer"
+            "url": "https://github.com/farmani/yii2-mailgun-mailer"
         }
     ]
 }
